@@ -13,6 +13,7 @@
     "canvas": "^2.6.1",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.2",
+    "es-module-shims": "^0.4.6",
     "escodegen": "^1.14.1",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
@@ -23,7 +24,6 @@
     "eslint-plugin-no-unsanitized": "^3.1.1",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-unicorn": "^20.0.0",
-    "es-module-shims": "^0.4.6",
     "fancy-log": "^1.3.3",
     "globals": "^11.12.0",
     "gulp": "^4.0.2",
@@ -59,7 +59,8 @@
   },
   "scripts": {
     "postinstall": "node -e \"require('child_process').execSync('cross-env PUPPETEER_PRODUCT=firefox node node_modules/puppeteer/install.js');\"",
-    "test": "gulp npm-test"
+    "test": "gulp npm-test",
+    "build": "gulp generic"
   },
   "repository": {
     "type": "git",

@@ -74,6 +74,8 @@ import { SecondaryToolbar } from "./secondary_toolbar.js";
 import { Toolbar } from "./toolbar.js";
 import { ViewHistory } from "./view_history.js";
 
+const electron = window["require"]("electron");
+
 const DEFAULT_SCALE_DELTA = 1.1;
 const DISABLE_AUTO_FETCH_LOADING_BAR_TIMEOUT = 5000; // ms
 const FORCE_PAGES_LOADED_TIMEOUT = 10000; // ms
@@ -1794,6 +1796,7 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
     "null",
     "http://mozilla.github.io",
     "https://mozilla.github.io",
+    'file://'
   ];
   validateFileURL = function (file) {
     if (file === undefined) {
@@ -2024,6 +2027,11 @@ function webViewerPageRendered(evt) {
   // ensure that the page number input loading indicator is hidden.
   if (pageNumber === PDFViewerApplication.page) {
     PDFViewerApplication.toolbar.updateLoadingIndicatorState(false);
+    setTimeout(() => {
+      electron.ipcRenderer.send('pdfjs-pagerendered', {
+        status: true
+      });
+    }, 200);
   }
 
   // Prevent errors in the edge-case where the PDF document is removed *before*
